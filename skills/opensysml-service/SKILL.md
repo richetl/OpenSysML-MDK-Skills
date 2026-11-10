@@ -11,7 +11,7 @@ metadata:
 
 `sysml-grpc` is one process serving gRPC, gRPC-Web, Connect (protobuf and JSON), server
 reflection and `GET /health` on a single port (default `50051`). The Python, Node, Java,
-Rust, Julia and MATLAB clients are thin wrappers over it; anything they can do is one RPC
+Rust, .NET, Julia and MATLAB clients are thin wrappers over it; anything they can do is one RPC
 on `sysml.SysMLService`. The contract is `api/proto/sysml.proto` in the OpenSysML
 repository, documented in `docs/reference/api.md`, `docs/reference/service-transports.md`
 and `docs/reference/wire-contract.md`. Coding-agent hosts (Claude Code, Cursor, …) do not
