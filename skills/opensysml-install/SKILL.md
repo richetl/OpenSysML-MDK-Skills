@@ -15,7 +15,7 @@ OpenSysML ships five executables from one release:
 |---|---|---|
 | `sysml` | CLI, REPL, validator, execution runtime, document generator | `opensysml-<os>-<arch>.tar.gz` (`.zip` on Windows) bundle, with `sysml-lsp` |
 | `sysml-lsp` | Language Server Protocol server for editors | the same bundle |
-| `sysml-grpc` | Service process the Python/Node/Java/Rust/Julia/MATLAB clients talk to | bare `sysml-grpc-<os>-<arch>` binary + `.sha256` (from v0.9.0) |
+| `sysml-grpc` | Service process the Python/Node/Java/Rust/.NET/Julia/MATLAB clients talk to | bare `sysml-grpc-<os>-<arch>` binary + `.sha256` (from v0.9.0) |
 | `sysml-jupyter-kernel` | Jupyter kernel backed by the REPL | bare `sysml-jupyter-kernel-<os>-<arch>` binary + `.sha256` (from v0.10.0) |
 | `sysml-mcp` | Model Context Protocol server for coding agents | its own `sysml-mcp-<os>-<arch>.tar.gz`/`.zip` with its manual page (from v0.12.0; also `npx -y @openmbee/sysml-mcp`, Node ≥ 22.22.2) |
 
@@ -121,12 +121,18 @@ build prints `v0.11.0-<n>-g<commit>` until the 0.12.0 tag exists) and `sysml -ma
 
 ## Binaries the language clients download for themselves
 
-The Python, Node, Java and Rust clients start a private `sysml-grpc` and resolve it in this
+The Python, Node, Java, Rust and .NET clients start a private `sysml-grpc` and resolve it in this
 order: an explicit path (`OPENSYSML_GRPC_BINARY`, or a constructor argument), the shared cache
 `~/.opensysml/bin/`, a verified release download matching the client's pinned version, then
 `PATH`. Downloads are checked against SHA-256 digests baked into the client package; a
 mismatch raises a `ChecksumMismatchError` rather than running the binary. Development
 (unpinned) client builds refuse to download unless `OPENSYSML_ALLOW_UNPINNED_DOWNLOAD=1`.
+The .NET client (in nightly builds and the release after v0.12.1) pins the digests of the checkout
+it is referenced from, checks the `.sha256` the release serves against the pin, and raises
+`ChecksumMismatchException` on a mismatch; like Rust it does not verify the release's Sigstore
+signature, so a release it pins no digest for is `UnpinnedReleaseException` before anything is
+fetched. An unreleased checkout pins nothing for its own version: point `OPENSYSML_GRPC_BINARY`
+at a `make build-grpc` binary (see `opensysml-dotnet`).
 Julia and MATLAB look at `OPENSYSML_GRPC_BINARY`, then the cache, then `PATH`, and do not
 download. The Jupyter kernel package (`pip install jupyter-opensysml-kernel`) carries
 `sysml-jupyter-kernel` in its platform wheels and verifies a download from the source

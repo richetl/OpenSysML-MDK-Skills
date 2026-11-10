@@ -5,7 +5,7 @@ Skills that teach coding agents to use the
 — the `sysml` binary (CLI, REPL, checking, documents, conversion, migration), the
 `sysml-grpc` service, `sysml-lsp`, the `sysml-mcp` Model Context Protocol server, the Jupyter
 kernel, the WebAssembly builds — and every
-client library (Go, Python, Node/TypeScript, Java, Rust, Julia, MATLAB/Octave).
+client library (Go, Python, Node/TypeScript, Java, Rust, .NET, Julia, MATLAB/Octave).
 
 Each skill is a directory under `skills/` with a `SKILL.md` in the
 [Agent Skills](https://agentskills.io) format, so Claude Code, Codex, Cursor, OpenCode,
@@ -59,6 +59,7 @@ into the location your tool reads (for example `.claude/skills/`, `.agents/skill
 | [opensysml-node](skills/opensysml-node/SKILL.md) | `@openmbee/opensysml` (Node 22.22.2+, browser, WASM) |
 | [opensysml-java](skills/opensysml-java/SKILL.md) | `org.openmbee:opensysml` (JDK 17+) |
 | [opensysml-rust](skills/opensysml-rust/SKILL.md) | `opensysml` on crates.io |
+| [opensysml-dotnet](skills/opensysml-dotnet/SKILL.md) | `OpenMBEE.OpenSysML` (.NET 10; a `ProjectReference` to `client/dotnet`, not on NuGet) |
 | [opensysml-julia](skills/opensysml-julia/SKILL.md) | `OpenSysML` (client/julia) |
 | [opensysml-matlab](skills/opensysml-matlab/SKILL.md) | `+opensysml` (client/matlab, MATLAB and Octave) |
 

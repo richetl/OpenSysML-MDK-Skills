@@ -40,7 +40,8 @@ does not expose: `compact` (the compact api-json form, `docs/reference/api-json-
 
 The REPL does the same with `%save model.ttl` / `%save model.json` / `%save model.sysml`,
 and every client exposes `convert(model, "ttl")` (`to_turtle`, `to_api_json`, `to_sysml` in
-Rust; `Convert` RPC over the service, with `ConvertFile`/`ConvertSource` helpers in Go).
+Rust; `ToTurtleAsync`, `ToApiJsonAsync`, `ToNotationAsync` on a .NET `Model`; `Convert` RPC over the
+service, with `ConvertFile`/`ConvertSource` helpers in Go).
 `-from fmu` reads a Functional Mock-up Unit's model description as a model. A SysML v2 API
 branch URL (`flexo://project/branch`, or the endpoint's `https://` URL) is accepted as the
 input or `-o` of `-convert`, with `-sync-state FILE` recording the last-seen commit and the
